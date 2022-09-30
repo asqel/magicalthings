@@ -11,8 +11,10 @@ import com.asqool.magicalthings.commands.mana;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -77,37 +79,32 @@ public class modEvents {
                 event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
                     float a=caps.get("mana");
                     event.player.sendSystemMessage(Component.literal(Float.toString(a)));
+                    System.out.println( event.player.getAttributeValue(ForgeMod.REACH_DISTANCE.get()));
+                    
+                        
                 });
             }
             if(event.player.hasEffect(magical_effects.long_arm.get())){
-                execCommand("attribute @ forge:reach_distance base set 15".replace("@",event.player.getName().getString()), event.player.level);
-                event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
-                    caps.set("long_arm_or_not",1f);
-                });
-            }
+                if (event.player.getAttributes().hasModifier(ForgeMod.REACH_DISTANCE.get(), magicalthings.long_arm_uuid)){
+                    if (event.player.getAttributes().getModifierValue(ForgeMod.REACH_DISTANCE.get(), magicalthings.long_arm_uuid)!=10){
+                        execCommand("/attribute @s forge:reach_distance modifier remove d71e0cde-84eb-4dc3-b941-47be1935a1c0".replace("@s", event.player.getName().getString()), event.player.getLevel());
+                        execCommand("/attribute @s forge:reach_distance modifier add d71e0cde-84eb-4dc3-b941-47be1935a1c0 long_arm 10 add".replace("@s", event.player.getName().getString()), event.player.getLevel());}}
+                else{
+                    execCommand("/attribute @s forge:reach_distance modifier add d71e0cde-84eb-4dc3-b941-47be1935a1c0 long_arm 10 add".replace("@s", event.player.getName().getString()), event.player.getLevel());}}
             else{
-                event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
-                    if(caps.get("long_arm_or_not")==1f){
-                        execCommand("attribute @ forge:reach_distance base set 5".replace("@",event.player.getName().getString()), event.player.level);
-                        caps.set("long_arm_or_not",0f);
-                    }
-                });
-            }
+                if (event.player.getAttributes().hasModifier(ForgeMod.REACH_DISTANCE.get(), magicalthings.long_arm_uuid)){
+                        execCommand("/attribute @s forge:reach_distance modifier remove d71e0cde-84eb-4dc3-b941-47be1935a1c0".replace("@s", event.player.getName().getString()), event.player.getLevel());}}
 
             if(event.player.hasEffect(magical_effects.name_hide.get())){
-                execCommand("attribute @ forge:nametag_distance base set 0".replace("@",event.player.getName().getString()), event.player.level);
-                event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
-                    caps.set("namehideornot",1f);
-                });
-            }
+                if (event.player.getAttributes().hasModifier(ForgeMod.NAMETAG_DISTANCE.get(), magicalthings.name_hide_uuid)){
+                    if (event.player.getAttributes().getModifierValue(ForgeMod.NAMETAG_DISTANCE.get(), magicalthings.name_hide_uuid)!=0){
+                        execCommand("/attribute @s forge:nametag_distance modifier remove @@".replace("@s", event.player.getName().getString()).replace("@@",magicalthings.name_hide_uuid.toString()), event.player.getLevel());
+                        execCommand("/attribute @s forge:nametag_distance modifier add @@ name_hide 0 multiply".replace("@s", event.player.getName().getString()).replace("@@",magicalthings.name_hide_uuid.toString()), event.player.getLevel());}}
+                else{
+                    execCommand("/attribute @s forge:nametag_distance modifier add @@ name_hide 0 multiply".replace("@s", event.player.getName().getString()).replace("@@",magicalthings.name_hide_uuid.toString()), event.player.getLevel());}}
             else{
-                event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
-                    if(caps.get("namehideornot")==1f){
-                        execCommand("attribute @ forge:nametag_distance base set 64".replace("@",event.player.getName().getString()), event.player.level);
-                        caps.set("namehideornot",0f);
-                    }
-                });
-            }
-        }
+                if (event.player.getAttributes().hasModifier(ForgeMod.NAMETAG_DISTANCE.get(), magicalthings.name_hide_uuid)){
+                    execCommand("/attribute @s forge:nametag_distance modifier remove @@".replace("@s", event.player.getName().getString()).replace("@@",magicalthings.name_hide_uuid.toString()), event.player.getLevel());}}
+        }           
     }
 }

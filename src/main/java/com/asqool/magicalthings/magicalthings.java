@@ -1,5 +1,7 @@
 package com.asqool.magicalthings;
 
+import java.util.UUID;
+
 import com.asqool.magicalthings.effect.magical_effects;
 import com.asqool.magicalthings.item.magical_items;
 
@@ -18,8 +20,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class magicalthings
 {
     public static final String modid = "magicalthings";
-    public static final String long_arm_uuid="d71e0cde-84eb-4dc3-b941-47be1935a1c0";
-    public static final String name_hide_uuid="";
+    public static final UUID long_arm_uuid=UUID.fromString("d71e0cde-84eb-4dc3-b941-47be1935a1c0");
+    public static final UUID name_hide_uuid=UUID.fromString("824938aa-b8dc-442f-a844-196a889d49fb");
     public magicalthings()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
