@@ -75,15 +75,6 @@ public class modEvents {
                     caps.add("mana",0.2f);
                 }
             });
-            if(event.player.isCrouching()){
-                event.player.getCapability(playervarsProvider.PLAYER_VARS).ifPresent(caps->{
-                    float a=caps.get("mana");
-                    event.player.sendSystemMessage(Component.literal(Float.toString(a)));
-                    System.out.println( event.player.getAttributeValue(ForgeMod.REACH_DISTANCE.get()));
-                    
-                        
-                });
-            }
             if(event.player.hasEffect(magical_effects.long_arm.get())){
                 if (event.player.getAttributes().hasModifier(ForgeMod.REACH_DISTANCE.get(), magicalthings.long_arm_uuid)){
                     if (event.player.getAttributes().getModifierValue(ForgeMod.REACH_DISTANCE.get(), magicalthings.long_arm_uuid)!=10){
