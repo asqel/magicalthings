@@ -36,11 +36,11 @@ public class shield_spell extends Item{
                 if(user.isCrouching()){
                     System.out.println(xr);
                     if (xr>0){//down
-                        modEvents.execCommand("execute at @@ as @@ run fill ~1 ~-1 ~1 ~-1 ~-1 ~-1 obsidian keep".replace("@@",user.getName().getString()), world);
+                        modEvents.execCommand("execute at @@ as @@ run fill ~1 ~-1 ~1 ~-1 ~-1 ~-1 magicalthings:shield_block keep".replace("@@",user.getName().getString()), world);
                     }
                     else{//up
                         System.out.println(user.getName().toString());
-                        modEvents.execCommand("execute at @@ as @@ run fill ~1 ~2 ~1 ~-1 ~2 ~-1 obsidian keep".replace("@@",user.getName().getString()), world);
+                        modEvents.execCommand("execute at @@ as @@ run fill ~1 ~2 ~1 ~-1 ~2 ~-1 magicalthings:shield_block keep".replace("@@",user.getName().getString()), world);
                     }
                 }
                 else{
