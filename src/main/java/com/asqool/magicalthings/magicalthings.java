@@ -3,6 +3,7 @@ package com.asqool.magicalthings;
 import java.util.UUID;
 
 import com.asqool.magicalthings.block.magical_blocks;
+import com.asqool.magicalthings.block.entity.magical_block_entity;
 import com.asqool.magicalthings.effect.magical_effects;
 import com.asqool.magicalthings.item.magical_items;
 
@@ -30,6 +31,7 @@ public class magicalthings
         magical_blocks.register(modEventBus);
         magical_items.register(modEventBus);
         magical_effects.register(modEventBus);
+        magical_block_entity.register(modEventBus);
         
         modEventBus.addListener(this::commonSetup);
         
